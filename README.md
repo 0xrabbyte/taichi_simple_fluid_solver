@@ -1,27 +1,43 @@
-# 太极图形课S1-标题部分
-这个作业未来或将是你的开源项目，标题的内容可以来自作业中的核心关键词，让读者一眼看出你所完成的工作/做出的好玩demo
+# 最简单的流体仿真
 
-如果暂时未想好，起名时可以参考“太极图形课S1-xxx作业”
-
-如下是作业（项目）展开说明的方法，可以帮大家理清思路，并且也对读者非常友好，请小伙伴们多多参考哦
 
 ## 背景简介
-这里可以简要描述作业（项目）的基本背景情况，它源自哪里？能够有效解决哪些问题？可以尽情列举它的亮点哦
+仿真部分还是要交作业的
+
+第二节流体仿真课之后,天添老师提到了The Art of Fluid Animation [Stam 2015]及其中译本《流体动画的计算艺术》-- 叶军涛、杨旭波译这一科普向的读物。刚好校图书馆里有，我便拿来翻了翻。的确大部分都十分可理解，可是在其通俗诙谐的文字中还是包含了许多硬核的知识，可无奈作者都跳过了。而在其中一部分给出了一个流体仿真器的主体部分C实现,看上去比较友好，于是便有了这次作业。
+
+其实书中关于这个流体仿真器的实现是作者总结了自己在[GDC2003上的Real-Time Fluid Dynamics for Games](https://www.autodesk.com/research/publications/real-time-fluid-dynamics)与发布的[A Simple Fluid Solver based on the FFT(Journal of Graphics Tools 2001)](https://www.autodesk.com/research/publications/a-simple-fluid-solver)这篇。
 
 ## 成功效果展示
-这里可以展示这份作业（项目）run起来后的可视化效果，可以让其他人更直观感受到你的工作
+![fluid](/output/fluid.jpg)
+![velocity](output/velocity.jpg)
+![taichi_logo](output/video.gif)
 
-![fractal demo](./data/fractal.jpg)
-## 整体结构（Optional）
-脉络清晰的结构能完整展示你的设计思想，以及实现方式，方便读者快读代入，建议可以在repo的目录中包含如下内容：
-这个部分希望大家可以大作业中加入，小作业中可以选择性加入（如果不加也是OK的）
+## 整体结构
 ```
 -LICENSE
--|data
+-|output
 -README.MD
--xxx.py
+-main.py                    主程序
+-bruteforce_fluid_solver.py 半拉格朗日法流体仿真
+-fft_fluid_solver.py        用FFT写了project部分
+-taichi_logo_list.py        用List存了Taichi的Logo
 ```
+## 使用方法
+单击添加流速,右击添加染料
+
+v键切换画布与速度场视图
+
+s键截图,r键录制
+
+t键添加Taichi的Logo
+
+## 还存在的问题
+FFT部分由于python本身的效率低下及我对numpy和taichi结合不良,而我自己又不太会写并行FFT,所以基本不能运行,甚至完全不能调试(假装我写对了吧)
+
+GUI中对于鼠标点击拖动的采样率太低,所以笔迹完全不连续
+
+我也不太清楚如何用ti.VideoManager录制直接绘制屏幕上的符号
 
 ## 运行方式
-相信读者们看到这里已经迫不及待想尝试了，这里标记好快速上手的方式即可~  
-例如:  `python3 main.py`
+我直接  `python3 main.py`

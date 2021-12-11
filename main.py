@@ -28,15 +28,15 @@ result_dir = "./output"
 video_manager = ti.VideoManager(output_dir = result_dir, framerate = 20)
 while gui.running:
     init_prev()
+    if(gui.is_pressed(ti.GUI.LMB)):
+        x, y = gui.get_cursor_pos()
+        mouse_state = 1
+    if(gui.is_pressed(ti.GUI.RMB)):
+        x, y = gui.get_cursor_pos()
+        mouse_state = 2
+        omx, omy = x, y
     if gui.get_event(ti.GUI.PRESS):
-        if gui.event.key == ti.GUI.LMB:
-            x, y = gui.get_cursor_pos()
-            mouse_state = 1
-        elif gui.event.key == ti.GUI.RMB:
-            x, y = gui.get_cursor_pos()
-            mouse_state = 2
-            omx, omy = x, y
-        elif gui.event.key == 'v':
+        if gui.event.key == 'v':
             dvel = not dvel
         elif gui.event.key == 't':
             for i in taichi_logo:
